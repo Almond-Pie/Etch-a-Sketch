@@ -1,9 +1,9 @@
 // Promt user for the size of grid 
-let height = window.prompt("Wat do you what the height to be ?, ")
+let height = window.prompt("What do you what the height to be ?, ")
 let width = window.prompt("What do you what the width to be ?, ")
 
 // Target the container ID
-const Container  = document.querySelector("#Container ")
+const Container  = document.querySelector("#Container")
 
 // Use a for loop to simplify creating the divs
 for (let i = 0; i < height; i++) {   // Outer loop → rows
@@ -13,7 +13,16 @@ for (let i = 0; i < height; i++) {   // Outer loop → rows
     }
 }
 
-// Use event listener to change color of the div
-div.addEventListener("mouseover", function() {
-    div.style.backgroundColor = "blue";
+let allDivs = document.querySelectorAll("#Container div")
+
+allDivs.forEach(function(div){
+    div.addEventListener("mouseenter",function(){
+    div.style.backgroundColor = "black";
+    })
+
+    allDivs.forEach(function(div){
+        div.addEventListener("mouseleave",function(){
+        div.style.backgroundColor = "black";
+        })
+    })
 });
