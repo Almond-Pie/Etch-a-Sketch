@@ -5,20 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="index.js" defer></script>
-    <title>Document</title>
+    <title>Etch-a-Sketch</title>
 </head>
-
 <body>
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Enter Grid Size</h2>
-            <label for="height">Height:</label>
-            <input type="number" id="height" min="2" max="100" required>
-            <button id="submit">Submit</button>
+
+    <div id="logo">
+        <h1>Etch<span style="color:white;">.<span style="color:#e06c75;">A</span>.</span>("<span style="color:#61afef;">Sketch</span>")</h1>
         </div>
-    </div>
+        
+    <div id="mainContainer">
+
+        <button id="createGridButton">Create Grid</button>
+        <div id="modal" class="modal">
+            <div class="modalContent">
+                <h2>Enter Grid Size</h2>
+                <label for="height">Height:</label>
+                <input type="number" id="height" min="2" max="100" required>
+                <button id="submit">Submit</button>
+                <div id="errorMessage"></div>
+            </div>
+        </div>
+       
+    <div id="container"></div>
     
-    <div id="Container"></div>
+    </div>
 
 </body>
 </html>

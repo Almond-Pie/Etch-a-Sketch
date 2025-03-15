@@ -1,55 +1,66 @@
 // Select modal elements
 let modal = document.getElementById("modal");
-let submitButton = document.getElementById("submit")
+let submitButton = document.getElementById("submit");
+let createGridButton = document.getElementById("createGridButton");
 
 // show modal when the page loads
-window.onload = function (){
+createGridButton.addEventListener("click", function() {
     modal.style.display = "flex";
-};
-
-// handle submit click event
-submitButton.addEventListener("click", function(){
-    let height = document.getElementById("height").value;
-    let width = height;
-
-if (height){
-    modal.style.display = "none";
-    createGrid(height,width);
-} else {
-    alert ("Please enter a valid height")
-}
+    modal.style.justifyContent  = "center"
+    modal.style.alignItems = "center"
 });
 
-function createGrid (height,width){
-    const container = document.querySelector("#Container");
-    container.innerHTML = ""; // this will clear the previos grid
+// handle submit click event
+submitButton.addEventListener("click", function() {
+    let height = parseInt(document.getElementById("height").value);
+    let width = height;
+    
+    if (isNaN(height) || height < 2 || height > 100) {
+        document.getElementById("errorMessage").textContent =
+            "Please enter a valid height between 2 and 100.";
+        return;
+    } else if (!height) {
+        document.getElementById("errorMessage").textContent =
+            "Please enter a valid height";
+        return;
+    } else {
+        modal.style.display = "none";
+        createGrid(height, width);
+    }
+});
 
-// This is the calculation to find the width of the div
-// This is based on the size of the container and the number of divs
-const containerWidth = container.offsetWidth; // Returns the layout width of an element as an integer
-const divSize = Math.floor(containerWidth / width); // Calculates div size based on num of colums
-
-// Create the grid
-for (let i = 0; i < height; i++) {   // Outer loop → rows
-    for (let j = 0; j < width; j++) {  // Inner loop → columns
-        let div = document.createElement("div"); // Create a new div
-        div.style.width = `${divSize}px`;
-        div.style.height = `${divSize}px`;
-        div.style.border = "1px solid black";
-        container.appendChild(div);
+function createGrid(height, width) {
+    const container = document.getElementById("container");
+    container.innerHTML = ""; // Clear previous grid
+    
+    // Set fixed container size
+    const containerWidth = 700;
+    const containerHeight = 700;
+    container.style.width = `${containerWidth}px`;
+    container.style.height = `${containerHeight}px`;
+    
+    // Calculate cell size including borders
+    const borderWidth = 1; // 1px border
+    const cellSize = (containerWidth / width) - (2 * borderWidth / width);
+    
+    // Create the grid
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            let div = document.createElement("div");
+            div.style.width = `${cellSize}px`;
+            div.style.height = `${cellSize}px`;
+            div.style.border = `${borderWidth}px solid #ddd`;
+            container.appendChild(div);
         }
     }
-let allDivs = document.querySelectorAll("#Container div")
-
-allDivs.forEach(function(div){
-    div.addEventListener("mouseenter",function(){
-        div.style.backgroundColor = "black";
-    });
-
-    div.addEventListener("mouseleave",function(){
-        div.style.backgroundColor = "black";
+    
+    let allDivs = document.querySelectorAll("#container div");
+    allDivs.forEach(function(div) {
+        div.addEventListener("mouseenter", function() {
+            div.style.backgroundColor = "black";
+        });
+        div.addEventListener("mouseleave", function() {
+            div.style.backgroundColor = "black";
         });
     });
 }
-
-
