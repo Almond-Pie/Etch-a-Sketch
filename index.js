@@ -34,8 +34,8 @@ function createGrid(height, width) {
     container.innerHTML = ""; // Clear previous grid
     
     // Set fixed container size
-    const containerWidth = 700;
-    const containerHeight = 700;
+    const containerWidth = 600;
+    const containerHeight = 600;
     container.style.width = `${containerWidth}px`;
     container.style.height = `${containerHeight}px`;
     
