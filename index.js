@@ -2,16 +2,21 @@
 let modal = document.getElementById("modal");
 let submitButton = document.getElementById("submit");
 let createGridButton = document.getElementById("createGridButton");
+let borderWidth = ""
 
-// show modal when the page loads
+// Show modal when the page loads
 createGridButton.addEventListener("click", function() {
     modal.style.display = "flex";
     modal.style.justifyContent  = "center"
     modal.style.alignItems = "center"
 });
 
-// handle submit click event
+// Handle submit click event
 submitButton.addEventListener("click", function() {
+    container.style.display = "flex";
+    actionButtonsContainer.style.display = "flex";
+    
+
     let height = parseInt(document.getElementById("height").value);
     let width = height;
     
@@ -26,12 +31,19 @@ submitButton.addEventListener("click", function() {
     } else {
         modal.style.display = "none";
         createGrid(height, width);
-    }
-});
+    }}
+);
+
+const generateRGBValue = () => {
+    const red = Math.floor(Math.random() * 225);
+    const green = Math.floor(Math.random() * 225);
+    const blue = Math.floor(Math.random() * 225);
+    return red, green, blue
+};
 
 function createGrid(height, width) {
     const container = document.getElementById("container");
-    container.innerHTML = ""; // Clear previous grid
+    container.innerHTML = "";
     
     // Set fixed container size
     const containerWidth = 600;
@@ -53,14 +65,46 @@ function createGrid(height, width) {
             container.appendChild(div);
         }
     }
-    
+
+    // Pen tool function
     let allDivs = document.querySelectorAll("#container div");
     allDivs.forEach(function(div) {
-        div.addEventListener("mouseenter", function() {
-            div.style.backgroundColor = "black";
-        });
-        div.addEventListener("mouseleave", function() {
+        div.addEventListener("mouseover", function() {
             div.style.backgroundColor = "black";
         });
     });
+
+    erase.addEventListener("click", function() {
+        allDivs.forEach(function(div) {
+            div.style.backgroundColor = "white"; 
+        });
+    });
+
+    let isColorRandomised = false; // Initialize border state
+
+    RandomiseColor.addEventListener("click", function() {
+      allDivs.forEach(function(div) {
+        div.addEventListener("mouseover", function() {
+            div.style.backgroundColor = "black";
+        });
+      });
+      isColorRandomised = true;
+    });
+
+    // Grid visibility function
+    let isBorderVisible = true; // Initialize border state
+
+    removeGrid.addEventListener("click", function() {
+      allDivs.forEach(function(div) {
+        if (isBorderVisible) {
+          div.style.borderWidth = '0';
+          div.style.borderStyle = 'none';
+        } else {
+          div.style.borderWidth = '1px';
+          div.style.borderStyle = 'solid';
+        }
+      });
+      isBorderVisible = !isBorderVisible; // Toggle the border state for the next click
+    });
+
 }

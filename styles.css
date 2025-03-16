@@ -80,23 +80,22 @@ div.modalContent {
     margin: 5px auto;
 }
 
-#mainContainer{
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+#showContainer{
+    display: none;
 }
 
 div#container {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
     box-sizing: content-box; 
     border:  15px solid #e06c75;
+    border-radius: 5px;
     justify-content: center;
     align-items: center;
     overflow: hidden; 
-    margin: 40px;
+    margin: 20px;
 }
 
 div#container > div {
@@ -109,4 +108,25 @@ div#container > div {
     transition: background-color 0.3s ease;
     font-size: 0;
     line-height: 0;
+}
+
+div#actionButtonsContainer{
+    display: none;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    width: 630px;
+    gap: 5px;
+}
+
+button.actionButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 25px;
+    color: #fff;
+    border: 0;
+    font-weight:800;
+    background-color: #61afef;
+    border-radius: 5px;
 }
