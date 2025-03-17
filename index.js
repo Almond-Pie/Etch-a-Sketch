@@ -2,7 +2,6 @@
 let modal = document.getElementById("modal");
 let submitButton = document.getElementById("submit");
 let createGridButton = document.getElementById("createGridButton");
-let borderWidth = ""
 
 // Show modal when the page loads
 createGridButton.addEventListener("click", function() {
@@ -16,7 +15,6 @@ submitButton.addEventListener("click", function() {
     container.style.display = "flex";
     actionButtonsContainer.style.display = "flex";
     
-
     let height = parseInt(document.getElementById("height").value);
     let width = height;
     
@@ -35,10 +33,10 @@ submitButton.addEventListener("click", function() {
 );
 
 const generateRGBValue = () => {
-    const red = Math.floor(Math.random() * 225);
-    const green = Math.floor(Math.random() * 225);
-    const blue = Math.floor(Math.random() * 225);
-    return red, green, blue
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    return `rgb(${red}, ${green}, ${blue})`;
 };
 
 function createGrid(height, width) {
@@ -52,7 +50,7 @@ function createGrid(height, width) {
     container.style.height = `${containerHeight}px`;
     
     // Calculate cell size including borders
-    const borderWidth = 1; // 1px border
+    const borderWidth = 1;
     const cellSize = (containerWidth / width) - (2 * borderWidth / width);
     
     // Create the grid
@@ -80,15 +78,19 @@ function createGrid(height, width) {
         });
     });
 
-    let isColorRandomised = false; // Initialize border state
-
+    // RandomiseColor function
+    let isColorRandomised = false; // Initialize state
     RandomiseColor.addEventListener("click", function() {
-      allDivs.forEach(function(div) {
-        div.addEventListener("mouseover", function() {
-            div.style.backgroundColor = "black";
+        isColorRandomised = !isColorRandomised;
+        allDivs.forEach(function(div) {
+            div.addEventListener("mouseover", function() {
+                if (isColorRandomised) {
+                    div.style.backgroundColor = generateRGBValue(); 
+                } else {
+                    div.style.backgroundColor = "black"
+                }
+            });
         });
-      });
-      isColorRandomised = true;
     });
 
     // Grid visibility function
@@ -106,5 +108,4 @@ function createGrid(height, width) {
       });
       isBorderVisible = !isBorderVisible; // Toggle the border state for the next click
     });
-
 }
